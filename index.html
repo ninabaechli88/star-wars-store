@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Star Wars Store — Que la Fuerza te acompañe</title>
+<meta name="description" content="Tienda oficial de Star Wars. Colección 2026 de productos exclusivos, coleccionables, ropa y juguetes.">
+<meta property="og:title" content="Star Wars Store — Que la Fuerza te acompañe">
+<meta property="og:description" content="Tienda oficial de Star Wars con productos exclusivos 2026">
+<meta property="og:image" content="https://cdn-ssl.s7.shopdisney.com/is/image/DisneyShopping/418148203687?fmt=jpeg&qlt=90&wid=400">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --yellow: #FFE81F;
+    --yellow-dim: #FFE81F22;
+    --dark: #04060f;
+    --dark2: #0d0f1c;
+    --dark3: #13162a;
+    --text: #e8e8f0;
+    --text-muted: #7a7a99;
+    --radius: 10px;
+  }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--dark);
+    color: var(--text);
+    min-height: 100vh;
+  }
+
+  /* HEADER */
+  header {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(4, 6, 15, 0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 0.5px solid #FFE81F33;
+    padding: 0 2rem;
+    display: flex; align-items: center; justify-content: space-between;
+    height: 60px;
+  }
+  .logo {
+    font-family: 'Oswald', sans-serif;
+    font-size: 22px; font-weight: 600;
+    color: var(--yellow); letter-spacing: 4px;
+  }
+  .logo span { color: #fff; font-weight: 400; }
+  nav { display: flex; gap: 24px; }
+  nav a {
+    color: var(--text-muted); text-decoration: none;
+    font-size: 13px; letter-spacing: 1px; text-transform: uppercase;
+    transition: color 0.2s;
+  }
+  nav a:hover { color: var(--yellow); }
+  .cart-btn {
+    background: var(--yellow); color: #000;
+    border: none; padding: 8px 16px;
+    border-radius: 999px; font-weight: 600;
+    font-size: 13px; cursor: pointer; letter-spacing: 1px;
+    display: flex; align-items: center; gap: 6px;
+  }
+  .cart-btn .count {
+    background: #000; color: var(--yellow);
+    border-radius: 50%; width: 18px; height: 18px;
+    font-size: 11px; display: flex; align-items: center; justify-content: center;
+  }
+
+  /* HERO */
+  .hero {
+    position: relative; overflow: hidden;
+    min-height: 500px;
+    display: flex; align-items: center; justify-content: center;
+    text-align: center;
+    background: radial-gradient(ellipse at 50% 0%, #1a1a3e 0%, var(--dark) 70%);
+  }
+  .stars {
+    position: absolute; inset: 0;
+    background-image:
+      radial-gradient(1px 1px at 10% 20%, #fff 0%, transparent 100%),
+      radial-gradient(1px 1px at 30% 5%, #fff 0%, transparent 100%),
+      radial-gradient(1.5px 1.5px at 50% 15%, #ffe 0%, transparent 100%),
+      radial-gradient(1px 1px at 70% 8%, #fff 0%, transparent 100%),
+      radial-gradient(1px 1px at 90% 25%, #fff 0%, transparent 100%),
+      radial-gradient(1px 1px at 20% 50%, #fff 0%, transparent 100%),
+      radial-gradient(1px 1px at 80% 45%, #fff 0%, transparent 100%),
+      radial-gradient(1px 1px at 15% 80%, #fff 0%, transparent 100%),
+      radial-gradient(1px 1px at 55% 70%, #fff 0%, transparent 100%),
+      radial-gradient(1px 1px at 95% 60%, #fff 0%, transparent 100%),
+      radial-gradient(1px 1px at 40% 90%, #fff 0%, transparent 100%),
+      radial-gradient(1.5px 1.5px at 75% 85%, #ffe 0%, transparent 100%);
+  }
+  .hero-inner { position: relative; padding: 4rem 2rem; }
+  .hero-eyebrow {
+    font-size: 11px; letter-spacing: 5px; text-transform: uppercase;
+    color: var(--yellow); margin-bottom: 1rem;
+  }
+  .hero-title {
+    font-family: 'Oswald', sans-serif;
+    font-size: clamp(48px, 8vw, 90px);
+    font-weight: 600; color: #fff;
+    letter-spacing: 8px; line-height: 1;
+    margin-bottom: 0.5rem;
+  }
+  .hero-title em {
+    color: var(--yellow); font-style: normal;
+    display: block; font-size: 0.55em; letter-spacing: 12px;
+  }
+  .hero-sub {
+    font-size: 14px; color: var(--text-muted);
+    letter-spacing: 2px; margin-bottom: 2rem;
+    text-transform: uppercase;
+  }
+  .hero-cta {
+    background: var(--yellow); color: #000;
+    border: none; padding: 14px 36px;
+    font-family: 'Oswald', sans-serif;
+    font-size: 16px; font-weight: 600;
+    letter-spacing: 3px; text-transform: uppercase;
+    cursor: pointer; border-radius: 2px;
+    transition: opacity 0.2s;
+  }
+  .hero-cta:hover { opacity: 0.85; }
+
+  /* CATEGORIES BAR */
+  .categories {
+    display: flex; gap: 8px; flex-wrap: wrap;
+    padding: 1.5rem 2rem;
+    border-bottom: 0.5px solid #ffffff11;
+  }
+  .cat-btn {
+    padding: 8px 20px;
+    background: transparent;
+    border: 0.5px solid #ffffff22;
+    color: var(--text-muted);
+    border-radius: 999px; font-size: 12px;
+    letter-spacing: 1px; text-transform: uppercase;
+    cursor: pointer; transition: all 0.2s;
+  }
+  .cat-btn:hover, .cat-btn.active {
+    border-color: var(--yellow);
+    color: var(--yellow);
+    background: var(--yellow-dim);
+  }
+
+  /* CHARACTERS */
+  .section { padding: 2.5rem 2rem; }
+  .section-header {
+    display: flex; align-items: center; gap: 12px;
+    margin-bottom: 1.5rem;
+  }
+  .section-header h2 {
+    font-family: 'Oswald', sans-serif;
+    font-size: 22px; font-weight: 600;
+    letter-spacing: 3px; text-transform: uppercase;
+    color: #fff;
+  }
+  .section-line {
+    flex: 1; height: 0.5px;
+    background: linear-gradient(to right, #FFE81F44, transparent);
+  }
+
+  .chars-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    gap: 10px;
+  }
+  .char-card {
+    background: var(--dark2);
+    border: 0.5px solid #ffffff11;
+    border-radius: var(--radius);
+    padding: 1rem 0.5rem;
+    text-align: center;
+    cursor: pointer; transition: all 0.2s;
+  }
+  .char-card:hover {
+    border-color: var(--yellow);
+    background: #FFE81F08;
+    transform: translateY(-2px);
+  }
+  .char-card.selected {
+    border-color: var(--yellow);
+    background: var(--yellow-dim);
+  }
+  .char-icon { font-size: 32px; display: block; margin-bottom: 8px; }
+  .char-name { font-size: 11px; color: var(--text-muted); letter-spacing: 0.5px; }
+
+  /* PRODUCTS */
+  .products-section { padding: 2rem; }
+  .products-title {
+    font-family: 'Oswald', sans-serif;
+    font-size: 18px; font-weight: 600;
+    letter-spacing: 2px; text-transform: uppercase;
+    color: #fff; margin-bottom: 1.5rem;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .products-title::after {
+    content: ''; flex: 1; height: 0.5px;
+    background: linear-gradient(to right, #FFE81F44, transparent);
+  }
+
+  .products-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 16px;
+  }
+  .product-card {
+    background: var(--dark2);
+    border: 0.5px solid #ffffff11;
+    border-radius: var(--radius);
+    overflow: hidden; cursor: pointer;
+    transition: all 0.25s;
+  }
+  .product-card:hover {
+    border-color: #FFE81F55;
+    transform: translateY(-3px);
+  }
+  .product-img-wrap {
+    width: 100%; height: 180px;
+    background: var(--dark3);
+    display: flex; align-items: center; justify-content: center;
+    overflow: hidden; position: relative;
+  }
+  .product-img-wrap img {
+    width: 100%; height: 100%; object-fit: cover;
+    transition: transform 0.3s;
+  }
+  .product-card:hover .product-img-wrap img { transform: scale(1.05); }
+  .product-fallback { font-size: 52px; }
+  .product-info { padding: 12px; }
+  .product-badge {
+    display: inline-block; font-size: 9px;
+    padding: 3px 8px; border-radius: 999px;
+    letter-spacing: 1px; text-transform: uppercase;
+    background: var(--yellow-dim); color: var(--yellow);
+    margin-bottom: 6px;
+  }
+  .product-badge.sale { background: #ff444422; color: #ff4444; }
+  .product-badge.new { background: #00ff8822; color: #00ff88; }
+  .product-name {
+    font-size: 13px; font-weight: 500; color: var(--text);
+    line-height: 1.4; margin-bottom: 8px;
+  }
+  .product-price { font-size: 16px; color: var(--yellow); font-family: 'Oswald', sans-serif; }
+
+  /* MODAL */
+  .modal-overlay {
+    display: none; position: fixed; inset: 0;
+    background: rgba(0,0,0,0.8);
+    backdrop-filter: blur(4px);
+    z-index: 200;
+    align-items: center; justify-content: center;
+    padding: 1rem;
+  }
+  .modal-overlay.open { display: flex; }
+  .modal {
+    background: var(--dark2);
+    border: 0.5px solid #FFE81F33;
+    border-radius: 14px;
+    max-width: 500px; width: 100%;
+    overflow: hidden;
+  }
+  .modal-img-wrap {
+    height: 220px; background: var(--dark3);
+    display: flex; align-items: center; justify-content: center;
+    overflow: hidden;
+  }
+  .modal-img-wrap img { width: 100%; height: 100%; object-fit: cover; }
+  .modal-img-wrap .modal-icon { font-size: 72px; }
+  .modal-body { padding: 1.5rem; }
+  .modal-badge {
+    display: inline-block; font-size: 10px;
+    padding: 3px 10px; border-radius: 999px;
+    letter-spacing: 1px; text-transform: uppercase;
+    background: var(--yellow-dim); color: var(--yellow);
+    margin-bottom: 10px;
+  }
+  .modal-name {
+    font-family: 'Oswald', sans-serif;
+    font-size: 22px; font-weight: 600; color: #fff;
+    letter-spacing: 1px; margin-bottom: 6px;
+  }
+  .modal-price {
+    font-size: 26px; color: var(--yellow);
+    font-family: 'Oswald', sans-serif;
+    margin-bottom: 12px;
+  }
+  .modal-desc { font-size: 14px; color: var(--text-muted); line-height: 1.7; margin-bottom: 1.5rem; }
+  .modal-actions { display: flex; gap: 10px; }
+  .btn-add {
+    flex: 1; padding: 14px;
+    background: var(--yellow); color: #000;
+    border: none; border-radius: var(--radius);
+    font-family: 'Oswald', sans-serif;
+    font-size: 15px; font-weight: 600;
+    letter-spacing: 2px; text-transform: uppercase;
+    cursor: pointer; transition: opacity 0.2s;
+  }
+  .btn-add:hover { opacity: 0.85; }
+  .btn-close {
+    padding: 14px 20px;
+    background: transparent;
+    border: 0.5px solid #ffffff22;
+    color: var(--text-muted);
+    border-radius: var(--radius);
+    font-size: 13px; cursor: pointer;
+    transition: border-color 0.2s;
+  }
+  .btn-close:hover { border-color: #ffffff55; }
+
+  /* CART TOAST */
+  .toast {
+    position: fixed; bottom: 24px; right: 24px;
+    background: var(--yellow); color: #000;
+    padding: 12px 20px;
+    border-radius: var(--radius);
+    font-weight: 600; font-size: 13px; letter-spacing: 1px;
+    transform: translateY(80px); opacity: 0;
+    transition: all 0.3s;
+    z-index: 300;
+  }
+  .toast.show { transform: translateY(0); opacity: 1; }
+
+  /* FOOTER */
+  footer {
+    border-top: 0.5px solid #ffffff11;
+    padding: 3rem 2rem 2rem;
+    text-align: center;
+  }
+  .footer-logo {
+    font-family: 'Oswald', sans-serif;
+    font-size: 28px; font-weight: 600;
+    color: var(--yellow); letter-spacing: 6px;
+    margin-bottom: 0.5rem;
+  }
+  .footer-sub { font-size: 12px; color: var(--text-muted); letter-spacing: 2px; margin-bottom: 2rem; }
+  .footer-links { display: flex; gap: 24px; justify-content: center; flex-wrap: wrap; margin-bottom: 2rem; }
+  .footer-links a { color: var(--text-muted); font-size: 12px; text-decoration: none; letter-spacing: 1px; }
+  .footer-links a:hover { color: var(--yellow); }
+  .footer-credit {
+    font-size: 11px; color: #ffffff22;
+    margin-top: 1.5rem;
+    padding-top: 1rem;
+    border-top: 0.5px solid #ffffff11;
+  }
+  .footer-credit strong { color: var(--yellow); }
+
+  @media (max-width: 600px) {
+    header { padding: 0 1rem; }
+    nav { display: none; }
+    .hero-title { font-size: 40px; letter-spacing: 4px; }
+    .section, .products-section { padding: 1.5rem 1rem; }
+    .categories { padding: 1rem; }
+    .products-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+    .chars-grid { grid-template-columns: repeat(3, 1fr); }
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="logo">★ STAR <span>WARS</span></div>
+  <nav>
+    <a href="#productos">Productos</a>
+    <a href="#personajes">Personajes</a>
+    <a href="#novedades">Novedades</a>
+  </nav>
+  <button class="cart-btn" onclick="toggleCart()">
+    🛒 Carrito <span class="count" id="cart-count">0</span>
+  </button>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="stars"></div>
+  <div class="hero-inner">
+    <p class="hero-eyebrow">Colección Oficial 2026</p>
+    <h1 class="hero-title">
+      STAR WARS
+      <em>Store</em>
+    </h1>
+    <p class="hero-sub">Que la fuerza te acompañe</p>
+    <button class="hero-cta" onclick="document.getElementById('productos').scrollIntoView({behavior:'smooth'})">
+      Explorar colección
+    </button>
+  </div>
+</section>
+
+<!-- CATEGORIES -->
+<div class="categories" id="novedades">
+  <button class="cat-btn active" onclick="filterCat('all',this)">Todos</button>
+  <button class="cat-btn" onclick="filterCat('coleccionables',this)">Coleccionables</button>
+  <button class="cat-btn" onclick="filterCat('ropa',this)">Ropa</button>
+  <button class="cat-btn" onclick="filterCat('toys',this)">Juguetes</button>
+  <button class="cat-btn" onclick="filterCat('accesorios',this)">Accesorios</button>
+</div>
+
+<!-- CHARACTERS -->
+<section class="section" id="personajes">
+  <div class="section-header">
+    <h2>Personajes</h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="chars-grid">
+    <div class="char-card" onclick="filterChar('all',this)" data-char="all">
+      <span class="char-icon">🌌</span>
+      <div class="char-name">Todos</div>
+    </div>
+    <div class="char-card" onclick="filterChar('Darth Vader',this)" data-char="Darth Vader">
+      <span class="char-icon">🦾</span>
+      <div class="char-name">Darth Vader</div>
+    </div>
+    <div class="char-card" onclick="filterChar('Grogu',this)" data-char="Grogu">
+      <span class="char-icon">🐸</span>
+      <div class="char-name">Grogu</div>
+    </div>
+    <div class="char-card" onclick="filterChar('Mandalorian',this)" data-char="Mandalorian">
+      <span class="char-icon">⚔️</span>
+      <div class="char-name">Mandalorian</div>
+    </div>
+    <div class="char-card" onclick="filterChar('R2-D2',this)" data-char="R2-D2">
+      <span class="char-icon">🤖</span>
+      <div class="char-name">R2-D2</div>
+    </div>
+    <div class="char-card" onclick="filterChar('Stormtrooper',this)" data-char="Stormtrooper">
+      <span class="char-icon">👾</span>
+      <div class="char-name">Stormtrooper</div>
+    </div>
+    <div class="char-card" onclick="filterChar('Luke',this)" data-char="Luke">
+      <span class="char-icon">⚡</span>
+      <div class="char-name">Luke Skywalker</div>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUCTS -->
+<section class="products-section" id="productos">
+  <h2 class="products-title" id="products-title">Todos los productos</h2>
+  <div class="products-grid" id="products-grid"></div>
+</section>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="modal" onclick="handleModalClick(event)">
+  <div class="modal">
+    <div class="modal-img-wrap">
+      <img id="modal-img" src="" alt="" onerror="this.style.display='none'; document.getElementById('modal-icon').style.display='block'">
+      <div class="modal-icon" id="modal-icon" style="display:none"></div>
+    </div>
+    <div class="modal-body">
+      <div class="modal-badge" id="modal-badge"></div>
+      <div class="modal-name" id="modal-name"></div>
+      <div class="modal-price" id="modal-price"></div>
+      <div class="modal-desc" id="modal-desc"></div>
+      <div class="modal-actions">
+        <button class="btn-add" onclick="addToCart()">🛒 Agregar al carrito</button>
+        <button class="btn-close" onclick="closeModal()">✕</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast">✓ Agregado al carrito</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">★ STAR WARS</div>
+  <div class="footer-sub">La galaxia en tus manos</div>
+  <div class="footer-links">
+    <a href="#">Envíos</a>
+    <a href="#">Devoluciones</a>
+    <a href="#">Contacto</a>
+    <a href="#">Privacidad</a>
+    <a href="#">Términos</a>
+  </div>
+  <div class="footer-credit">
+    © 2026 Star Wars Store — Creada por <strong>Nina Baechli</strong> 🚀
+  </div>
+</footer>
+
+<script>
+const products = [
+  { id:1, name:'Anakin Skywalker Lightsaber Set', price:'$249.99', category:'coleccionables', char:'Darth Vader', badge:'Colección', desc:'Sable de luz que cambia de azul a rojo. Réplica exacta a película con sonidos reales. Incluye hoja intercambiable y base de display.', img:'https://cdn-ssl.s7.shopdisney.com/is/image/DisneyShopping/418148203687?fmt=jpeg&qlt=90&wid=400', icon:'⚔️' },
+  { id:2, name:'Grogu Zip Hoodie — The Mandalorian', price:'$74.99', category:'ropa', char:'Grogu', badge:'Nuevo', badgeType:'new', desc:'Sudadera con cierre para adultos con bordado de Grogu meditando en la espalda. Tela suave y cómoda. Disponible en tallas S–3XL.', img:'https://cdn-ssl.s7.shopdisney.com/is/image/DisneyShopping/5201057431022M?fmt=jpeg&qlt=90&wid=400', icon:'👕' },
+  { id:3, name:'Darth Vader Loungefly Mini Backpack', price:'$80.00', category:'accesorios', char:'Darth Vader', badge:'Exclusivo', desc:'Mini mochila Loungefly con diseño detallado de Darth Vader. Ideal para fans coleccionistas y uso diario. Incluye correas ajustables.', img:'https://cdn-ssl.s7.shopdisney.com/is/image/DisneyShopping/442090359413?fmt=jpeg&qlt=90&wid=400', icon:'🎒' },
+  { id:4, name:'Darth Maul Legacy Lightsaber', price:'$249.99', category:'coleccionables', char:'Darth Vader', badge:'Ed. Limitada', desc:'Sable de luz doble de Darth Maul con iluminación roja intensa. Incluye conector central para armar el sable icónico de dos hojas.', img:'https://cdn-ssl.s7.shopdisney.com/is/image/DisneyShopping/418142365244?fmt=jpeg&qlt=90&wid=400', icon:'⚡' },
+  { id:5, name:'R2-D2 Pijama Disfraz — Niños', price:'$32.99', category:'ropa', char:'R2-D2', badge:'Niños', desc:'Pijama de dos piezas disfraz de R2-D2 para niños. 100% algodón suave con detalles del icónico droide astromecánico.', img:'https://cdn-ssl.s7.shopdisney.com/is/image/DisneyShopping/2405057390724M?fmt=jpeg&qlt=90&wid=400', icon:'🤖' },
+  { id:6, name:'Stormtrooper Figure Set — 8 figuras', price:'$39.99', category:'toys', char:'Stormtrooper', badge:'Juguetes', desc:'Set de 8 figuras de Stormtroopers de distintas eras de la saga. Incluye display escénico con fondo de batalla espacial.', img:'https://cdn-ssl.s7.shopdisney.com/is/image/DisneyShopping/417130098393?fmt=jpeg&qlt=90&wid=400', icon:'👾' },
+  { id:7, name:'The Mandalorian & Grogu T-Shirt', price:'$36.99', category:'ropa', char:'Mandalorian', badge:'Exclusivo', desc:'Camiseta mineral wash con The Mandalorian y Grogu. Celebra el estreno de la película 2026. Diseño artwork exclusivo de Disney.', img:'https://cdn-ssl.s7.shopdisney.com/is/image/DisneyShopping/5205059241047M?fmt=jpeg&qlt=90&wid=400', icon:'👕' },
+  { id:8, name:'MagicBand+ Sable Jedi', price:'$44.99', category:'accesorios', char:'Mandalorian', badge:'MagicBand+', badgeType:'new', desc:'Pulsera interactiva MagicBand+ con diseño de sable Jedi. Reacciona en los parques Disney con efectos de luz y vibración.', img:'https://cdn-ssl.s7.shopdisney.com/is/image/DisneyShopping/419072918265?fmt=jpeg&qlt=90&wid=400', icon:'✨' },
+  { id:9, name:'Millennium Falcon Playset', price:'$89.99', category:'toys', char:'Luke', badge:'Juguetes', desc:'Halcón Milenario con luces, sonidos y lanzador de misiles. Incluye figuras de Han Solo, Chewbacca, Leia y C-3PO.', img:'https://cdn-ssl.s7.shopdisney.com/is/image/DisneyShopping/417149101442?fmt=jpeg&qlt=90&wid=400', icon:'🚀' },
+  { id:10, name:'Stormtrooper Hoodie Disfraz — Niños', price:'$22.04', category:'ropa', char:'Stormtrooper', badge:'30% OFF', badgeType:'sale', desc:'Sudadera disfraz Stormtrooper para niños. Ahora con 30% de descuento por tiempo limitado. Tallas 4–14.', img:'https://cdn-ssl.s7.shopdisney.com/is/image/DisneyShopping/2402106030746M?fmt=jpeg&qlt=90&wid=400', icon:'👾' },
+  { id:11, name:'Grogu Star Wars Day T-Shirt Kids', price:'$19.99', category:'ropa', char:'Grogu', badge:'May the 4th', desc:'Camiseta de Grogu para niños del Día de Star Wars 2026. Disponible en varios colores y personalizable con nombre.', img:'', icon:'🐸' },
+  { id:12, name:'Luke & Rex Black Series 2-Pack', price:'$41.98', category:'toys', char:'Luke', badge:'Hasbro 6"', desc:'Set de figuras articuladas 6" de Luke Skywalker (Jedi) y el Capitán Rex. Incluye accesorios y casco removible.', img:'', icon:'⚔️' },
+  { id:13, name:'Mandalorian Helmet — Réplica Premium', price:'$129.99', category:'coleccionables', char:'Mandalorian', badge:'Premium', desc:'Réplica en escala 1:1 del casco Mandaloriano de beskar. Materiales metalizados de alta calidad. Incluye soporte de exhibición.', img:'', icon:'🪖' },
+  { id:14, name:'R2-D2 Mochila 3D', price:'$55.00', category:'accesorios', char:'R2-D2', badge:'Nuevo', badgeType:'new', desc:'Mochila con forma 3D de R2-D2. Capacidad 20L, compartimentos múltiples, diseño ergonómico para uso diario y convenciones.', img:'', icon:'🎒' },
+];
+
+let cartTotal = 0;
+let activeCategory = 'all';
+let activeChar = 'all';
+let selectedProduct = null;
+
+function getFiltered() {
+  return products.filter(p =>
+    (activeCategory === 'all' || p.category === activeCategory) &&
+    (activeChar === 'all' || p.char === activeChar)
+  );
+}
+
+function renderProducts() {
+  const grid = document.getElementById('products-grid');
+  const list = getFiltered();
+  if (list.length === 0) {
+    grid.innerHTML = '<p style="color:var(--text-muted);font-size:14px;grid-column:1/-1;padding:2rem 0;">No hay productos en esta combinación de filtros.</p>';
+    return;
+  }
+  grid.innerHTML = list.map(p => `
+    <div class="product-card" onclick="openModal(${p.id})">
+      <div class="product-img-wrap">
+        ${p.img
+          ? `<img src="${p.img}" alt="${p.name}" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">`
+          : ''
+        }
+        <div class="product-fallback" style="display:${p.img ? 'none' : 'flex'};align-items:center;justify-content:center;width:100%;height:100%">${p.icon}</div>
+      </div>
+      <div class="product-info">
+        <div class="product-badge${p.badgeType === 'sale' ? ' sale' : p.badgeType === 'new' ? ' new' : ''}">${p.badge}</div>
+        <div class="product-name">${p.name}</div>
+        <div class="product-price">${p.price}</div>
+      </div>
+    </div>
+  `).join('');
+}
+
+function filterCat(cat, btn) {
+  activeCategory = cat;
+  document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  updateTitle();
+  renderProducts();
+}
+
+function filterChar(char, el) {
+  activeChar = char;
+  document.querySelectorAll('.char-card').forEach(c => c.classList.remove('selected'));
+  el.classList.add('selected');
+  updateTitle();
+  renderProducts();
+}
+
+function updateTitle() {
+  let title = '';
+  if (activeChar !== 'all') title = activeChar;
+  else if (activeCategory !== 'all') title = activeCategory.charAt(0).toUpperCase() + activeCategory.slice(1);
+  else title = 'Todos los productos';
+  document.getElementById('products-title').textContent = title;
+}
+
+function openModal(id) {
+  selectedProduct = products.find(p => p.id === id);
+  const p = selectedProduct;
+  document.getElementById('modal-name').textContent = p.name;
+  document.getElementById('modal-price').textContent = p.price;
+  document.getElementById('modal-desc').textContent = p.desc;
+  document.getElementById('modal-badge').textContent = p.badge;
+  const img = document.getElementById('modal-img');
+  const icon = document.getElementById('modal-icon');
+  if (p.img) {
+    img.src = p.img; img.style.display = 'block'; icon.style.display = 'none';
+  } else {
+    img.style.display = 'none'; icon.style.display = 'block'; icon.textContent = p.icon;
+  }
+  document.getElementById('modal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeModal() {
+  document.getElementById('modal').classList.remove('open');
+  document.body.style.overflow = '';
+  selectedProduct = null;
+}
+
+function handleModalClick(e) {
+  if (e.target === document.getElementById('modal')) closeModal();
+}
+
+function addToCart() {
+  cartTotal++;
+  document.getElementById('cart-count').textContent = cartTotal;
+  closeModal();
+  showToast();
+}
+
+function toggleCart() {
+  alert(`Tienes ${cartTotal} artículo${cartTotal !== 1 ? 's' : ''} en tu carrito.\n\n(Para una tarea real, aquí iría una página de checkout.)`);
+}
+
+function showToast() {
+  const t = document.getElementById('toast');
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2500);
+}
+
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+// Init
+document.querySelector('.char-card[data-char="all"]').classList.add('selected');
+renderProducts();
+</script>
+</body>
+</html>
